@@ -1,0 +1,21 @@
+* NGSPICE file created from inverter.ext - technology: sky130A
+
+.subckt sky130_fd_pr__nfet_01v8_92B3AB a_65_n238# a_n176_n150# a_n33_172# a_118_n150#
++ a_n131_n238# w_n314_n360# a_20_n150# a_n78_n150#
+X0 a_20_n150# a_n33_172# a_n78_n150# w_n314_n360# sky130_fd_pr__nfet_01v8 ad=4.35e+11p pd=3.58e+06u as=4.35e+11p ps=3.58e+06u w=1.5e+06u l=200000u
+X1 a_118_n150# a_65_n238# a_20_n150# w_n314_n360# sky130_fd_pr__nfet_01v8 ad=4.35e+11p pd=3.58e+06u as=0p ps=0u w=1.5e+06u l=200000u
+X2 a_n78_n150# a_n131_n238# a_n176_n150# w_n314_n360# sky130_fd_pr__nfet_01v8 ad=0p pd=0u as=4.35e+11p ps=3.58e+06u w=1.5e+06u l=200000u
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_6LLYWG a_n78_n100# a_n173_n100# a_n129_n197# a_18_n100#
++ a_63_n197# a_114_n100# w_n311_n319# a_n33_131#
+X0 a_18_n100# a_n33_131# a_n78_n100# w_n311_n319# sky130_fd_pr__pfet_01v8 ad=3e+11p pd=2.6e+06u as=3e+11p ps=2.6e+06u w=1e+06u l=180000u
+X1 a_114_n100# a_63_n197# a_18_n100# w_n311_n319# sky130_fd_pr__pfet_01v8 ad=2.95e+11p pd=2.59e+06u as=0p ps=0u w=1e+06u l=180000u
+X2 a_n78_n100# a_n129_n197# a_n173_n100# w_n311_n319# sky130_fd_pr__pfet_01v8 ad=0p pd=0u as=2.95e+11p ps=2.59e+06u w=1e+06u l=180000u
+.ends
+
+.subckt inverter in out vdd vss
+XXM1 in out in vss in vss out vss sky130_fd_pr__nfet_01v8_92B3AB
+XXM2 out vdd in vdd in out vdd in sky130_fd_pr__pfet_01v8_6LLYWG
+.ends
+

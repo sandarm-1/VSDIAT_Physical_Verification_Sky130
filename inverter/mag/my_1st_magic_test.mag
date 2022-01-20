@@ -1,0 +1,8 @@
+magic
+tech sky130A
+timestamp 1642682486
+use sky130_fd_pr__nfet_g5v0d10v5_7HNFWF  sky130_fd_pr__nfet_g5v0d10v5_7HNFWF_0
+timestamp 1642682486
+transform 1 0 110 0 1 72
+box -133 -144 133 144
+<< end >>

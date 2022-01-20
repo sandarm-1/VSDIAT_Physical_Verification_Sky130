@@ -1,0 +1,25 @@
+** sch_path: /home/darunix/VSDIAT_Courses/PV_Sky130/inverter/xschem/inverter_tb.sch
+**.subckt inverter_tb out in
+*.opin out
+*.opin in
+x1 in out net1 GND inverter
+
+V1 in GND pwl (0 0 20n 0 900n 1.8)
+V_DD net1 GND 1.8
+**** begin user architecture code
+
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+.control
+tran 1n 1u
+plot V(in) V(out)
+.endc
+
+**** end user architecture code
+**.ends
+
+.include inverter.spice
+
+.GLOBAL GND
+.end

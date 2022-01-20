@@ -1,0 +1,26 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1642682602
+<< error_s >>
+rect 601 603 659 609
+rect 601 569 613 603
+rect 601 563 659 569
+rect 601 391 659 397
+rect 601 357 613 391
+rect 601 351 659 357
+rect 129 313 187 319
+rect 129 279 141 313
+rect 129 273 187 279
+rect 129 119 187 125
+rect 129 85 141 119
+rect 129 79 187 85
+use sky130_fd_pr__pfet_01v8_M479BZ  sky130_fd_pr__pfet_01v8_M479BZ_0
+timestamp 1642682602
+transform 1 0 630 0 1 480
+box -211 -261 211 261
+use sky130_fd_pr__nfet_01v8_EDB9KC  sky130_fd_pr__nfet_01v8_EDB9KC_0
+timestamp 1642682602
+transform 1 0 158 0 1 199
+box -211 -252 211 252
+<< end >>

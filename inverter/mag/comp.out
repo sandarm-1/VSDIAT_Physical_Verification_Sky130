@@ -1,0 +1,66 @@
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_92B3AB in circuit inverter (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_6LLYWG in circuit inverter (0)(1 instance)
+Class inverter:  Merged 2 devices.
+
+Subcircuit summary:
+Circuit 1: inverter                        |Circuit 2: inverter                        
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (2)                |sky130_fd_pr__nfet_01v8 (1) **Mismatch**   
+sky130_fd_pr__pfet_01v8 (2)                |sky130_fd_pr__pfet_01v8 (1) **Mismatch**   
+Number of devices: 4 **Mismatch**          |Number of devices: 2 **Mismatch**          
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+NET mismatches: Class fragments follow (with fanout counts):
+Circuit 1: inverter                        |Circuit 2: inverter                        
+
+---------------------------------------------------------------------------------------
+Net: in                                    |Net: out                                   
+  sky130_fd_pr__nfet_01v8/2 = 2            |  sky130_fd_pr__pfet_01v8/1 = 1            
+  sky130_fd_pr__pfet_01v8/2 = 2            |  sky130_fd_pr__nfet_01v8/1 = 1            
+                                           |                                           
+Net: out                                   |Net: in                                    
+  sky130_fd_pr__nfet_01v8/1 = 1            |  sky130_fd_pr__pfet_01v8/2 = 1            
+  sky130_fd_pr__nfet_01v8/3 = 1            |  sky130_fd_pr__nfet_01v8/2 = 1            
+  sky130_fd_pr__pfet_01v8/3 = 1            |                                           
+  sky130_fd_pr__pfet_01v8/1 = 1            |                                           
+                                           |                                           
+Net: vss                                   |Net: vdd                                   
+  sky130_fd_pr__nfet_01v8/3 = 1            |  sky130_fd_pr__pfet_01v8/3 = 1            
+  sky130_fd_pr__nfet_01v8/4 = 2            |  sky130_fd_pr__pfet_01v8/4 = 1            
+  sky130_fd_pr__nfet_01v8/1 = 1            |                                           
+                                           |                                           
+Net: vdd                                   |Net: vss                                   
+  sky130_fd_pr__pfet_01v8/1 = 1            |  sky130_fd_pr__nfet_01v8/3 = 1            
+  sky130_fd_pr__pfet_01v8/4 = 2            |  sky130_fd_pr__nfet_01v8/4 = 1            
+  sky130_fd_pr__pfet_01v8/3 = 1            |                                           
+---------------------------------------------------------------------------------------
+DEVICE mismatches: Class fragments follow (with node fanout counts):
+Circuit 1: inverter                        |Circuit 2: inverter                        
+
+---------------------------------------------------------------------------------------
+Instance: sky130_fd_pr__nfet_01v8_92B3ABXM |Instance: sky130_fd_pr__nfet_01v8M1        
+  1 = 4                                    |  1 = 2                                    
+  2 = 4                                    |  2 = 2                                    
+  3 = 4                                    |  3 = 2                                    
+  4 = 4                                    |  4 = 2                                    
+                                           |                                           
+Instance: sky130_fd_pr__nfet_01v8_92B3ABXM |Instance: sky130_fd_pr__pfet_01v8M2        
+  1 = 4                                    |  1 = 2                                    
+  2 = 4                                    |  2 = 2                                    
+  3 = 4                                    |  3 = 2                                    
+  4 = 4                                    |  4 = 2                                    
+                                           |                                           
+Instance: sky130_fd_pr__pfet_01v8_6LLYWGXM |(no matching instance)                     
+  1 = 4                                    |                                           
+  2 = 4                                    |                                           
+  3 = 4                                    |                                           
+  4 = 4                                    |                                           
+                                           |                                           
+Instance: sky130_fd_pr__pfet_01v8_6LLYWGXM |(no matching instance)                     
+  1 = 4                                    |                                           
+  2 = 4                                    |                                           
+  3 = 4                                    |                                           
+  4 = 4                                    |                                           
+---------------------------------------------------------------------------------------
+Netlists do not match.
+Netlists do not match.
