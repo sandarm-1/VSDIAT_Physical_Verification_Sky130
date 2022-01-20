@@ -1,0 +1,26 @@
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_92B3AB in circuit inverter_new (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_6LLYWG in circuit inverter_new (0)(1 instance)
+Class inverter_new:  Merged 4 devices.
+
+Subcircuit summary:
+Circuit 1: inverter_new                    |Circuit 2: inverter_new                    
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8 (1)                |sky130_fd_pr__nfet_01v8 (1)                
+sky130_fd_pr__pfet_01v8 (1)                |sky130_fd_pr__pfet_01v8 (1)                
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 4                          |Number of nets: 4                          
+---------------------------------------------------------------------------------------
+Circuits match uniquely.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: inverter_new                    |Circuit 2: inverter_new                    
+-------------------------------------------|-------------------------------------------
+out                                        |out                                        
+in                                         |in                                         
+vdd                                        |vdd                                        
+vss                                        |vss                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes inverter_new and inverter_new are equivalent.
+Circuits match uniquely.
