@@ -1,0 +1,51 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1642757782
+<< nwell >>
+rect -38 261 498 582
+<< pwell >>
+rect 229 185 419 203
+rect 33 21 419 185
+rect 33 17 63 21
+rect 29 -17 63 17
+<< locali >>
+rect 351 383 443 493
+rect 20 265 73 337
+rect 20 215 155 265
+rect 199 215 267 265
+rect 393 109 443 383
+rect 331 51 443 109
+<< metal1 >>
+rect 0 496 460 592
+rect 0 -48 460 48
+<< labels >>
+rlabel locali s 20 215 155 265 4 A
+port 1 nsew
+rlabel locali s 20 265 73 337 4 A
+port 1 nsew
+rlabel locali s 199 215 267 265 4 B
+port 2 nsew
+rlabel metal1 s 0 -48 460 48 4 VGND
+port 3 nsew
+rlabel pwell s 29 -17 63 17 4 VNB
+port 4 nsew
+rlabel pwell s 33 17 63 21 4 VNB
+port 4 nsew
+rlabel pwell s 33 21 419 185 4 VNB
+port 4 nsew
+rlabel pwell s 229 185 419 203 4 VNB
+port 4 nsew
+rlabel nwell s -38 261 498 582 4 VPB
+port 5 nsew
+rlabel metal1 s 0 496 460 592 4 VPWR
+port 6 nsew
+rlabel locali s 331 51 443 109 4 X
+port 7 nsew
+rlabel locali s 393 109 443 383 4 X
+port 7 nsew
+rlabel locali s 351 383 443 493 4 X
+port 7 nsew
+<< properties >>
+string FIXED_BBOX 0 0 460 544
+<< end >>
