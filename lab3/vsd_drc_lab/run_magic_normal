@@ -1,0 +1,2 @@
+#!/bin/sh
+magic -rcfile /usr/local/share/pdk/sky130A/libs.tech/magic/sky130A.magicrc
