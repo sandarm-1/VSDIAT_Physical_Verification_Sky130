@@ -539,6 +539,7 @@ But essentially it’s a bunch of fixed layout that are tiled and stretched to f
 
 **Latch up rules:**
 Avoid PN and PNP junctions to be forward biased.
+
  <img src="https://user-images.githubusercontent.com/95447782/150607578-41ad9015-9869-417f-b9d1-fa145e684a33.png" alt="drawing" style="width:420px;"/>
 
 To avoid this, there are tap to diff distance rules.
@@ -804,7 +805,34 @@ Then we load the fill onto the original layout:
 
 Understanding PNR and physical verification:
 ====
-Theory Day 4 TBA
+**The OpenLane Flow.**
+OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault and custom methodology scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
+
+**OpenLane Design Flow Stages:**
+
+1. **Synthesis:** RTL is converted to Gate level netlist and STA is done.
+* RTL synthesis is done with Yosis
+* Technology mapping is done with ABC
+* Static Timing Analysis is done with OpenSTA.
+
+2. **Floorplanning:** macros are organized in rows as well as routing tracks, then PDN gets generated and well taps and decap cells are inserted.
+
+3. **Placement:** macros and cells are placed.
+
+4. **CTS:** Clock Tree Synthesis is done with TritonCTS.
+
+5. **Routing:** FastRoute does the global routing, then TritonRoute does the detailed routing and SPEF-Extractor does the SPEF extraction.
+
+6. **GDSII** generation is done with Magic to stream out the final GDS from the routed def, Klayout is also used.
+
+7. **Checks** like DRC & Antenna Checks are done in Magic, LVS is done with netgen and CVC is used for circuit validity checks.
+
+**Interactive Vs Non-Interactive modes for OpenLane**
+The Openlane flow can be run in Interactive or Non-Interactive modes.
+
+The Non interactive method uses scripts which are run in batch from the terminal in sequence to perform all the stages mentioned above. It is more automated but there is less control at each stage.
+
+The Interactive method lets the user intervene at each stage,  verifying the output of each stage and allowing to make any changes if required.
 
 
 
