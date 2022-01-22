@@ -15,31 +15,31 @@ The SkyWater Open Source PDK documentation can be found at <https://skywater-pdk
 
 Open source EDA tools can be used with the Sky 130 PDK:
 
-![image](https://user-images.githubusercontent.com/95447782/150655987-01d3fb50-207c-45d2-aaf9-7d7453ff6f1b.png)
+<img src="https://user-images.githubusercontent.com/95447782/150655987-01d3fb50-207c-45d2-aaf9-7d7453ff6f1b.png" alt="drawing" style="width:420px;"/>
 
 Libraries in the Sky 130 PDK:
 
-![image](https://user-images.githubusercontent.com/95447782/150656014-8c55369b-270c-469c-ba18-0aa16d7fa728.png)
+![image](https://user-images.githubusercontent.com/95447782/150656014-8c55369b-270c-469c-ba18-0aa16d7fa728.png" alt="drawing" style="width:420px;"/>
 
 This is the layer stack in the Sky 130 process.
 The Local Interconnect, made of TiN, is quite characteristic of this process, and is only used for very short distance interconnects on devices.
 
-![image](https://user-images.githubusercontent.com/95447782/150656149-0dda54f5-3ff2-4a4b-b902-a52cdf0a519b.png)
+<img src="https://user-images.githubusercontent.com/95447782/150656149-0dda54f5-3ff2-4a4b-b902-a52cdf0a519b.png" alt="drawing" style="width:420px;"/>
 
 Deep N well is available for noise isolation:
-![image](https://user-images.githubusercontent.com/95447782/150656257-8d9f2e63-47ce-4df4-af7e-9f903cae3afd.png)
+<img src="https://user-images.githubusercontent.com/95447782/150656257-8d9f2e63-47ce-4df4-af7e-9f903cae3afd.png" alt="drawing" style="width:420px;"/>
 
 There are 5 levels of metal:
 
-![image](https://user-images.githubusercontent.com/95447782/150656197-a4094ecc-1350-4417-b68f-8148e7d07a60.png)
+<img src="https://user-images.githubusercontent.com/95447782/150656197-a4094ecc-1350-4417-b68f-8148e7d07a60.png" alt="drawing" style="width:420px;"/>
 
 Some layers are generated automatically by the Magic layout software. For example, the NPC or nitride poly cut layer, is generated automatically by Magic from the position of other layers, like the poly and the contacts.
 
-![image](https://user-images.githubusercontent.com/95447782/150656239-8067a9b6-cb7b-4bdc-81c2-b6590df35e91.png)
+<img src="https://user-images.githubusercontent.com/95447782/150656239-8067a9b6-cb7b-4bdc-81c2-b6590df35e91.png" alt="drawing" style="width:420px;"/>
 
 The RDL is done separately:
 
-![image](https://user-images.githubusercontent.com/95447782/150656283-7fcfe552-398e-4758-8d92-a6462c1f84c3.png)
+<img src="https://user-images.githubusercontent.com/95447782/150656283-7fcfe552-398e-4758-8d92-a6462c1f84c3.png" alt="drawing" style="width:420px;"/>
 
 
 
