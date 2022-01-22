@@ -979,16 +979,20 @@ And that way we get a match!
 Excercise 9:
 LVS with property errors.
 After extracting the layout and netlisting the schematic, we run LVS and see property errors in some devices.
- 
+ ![image](https://user-images.githubusercontent.com/95447782/150655357-c355f0d9-f849-4502-b7e8-7f0c421c34a0.png)
+
 We use this information to see exactly what caps, resistors and transistors we need to edit, in this case in the schematic, to get the LVS match again.
 
 For the resistors and caps, we change their properties in the schematic.
- 
+ ![image](https://user-images.githubusercontent.com/95447782/150655362-86138425-d863-4afd-a1a8-ac5b3c7504fe.png)
+
 For the transistor, we change it in the layout from 2 fingers to 1 finger.
 For this, we first locate the specific transistor which is sky130_fd_pr__nfet_g5v0d10v5_8KW54N_0.
 
- 
+ ![image](https://user-images.githubusercontent.com/95447782/150655365-aecbee23-d69c-48b3-9c63-428f6f6d217c.png)
+
 And we get an LVS match.
- 
+ ![image](https://user-images.githubusercontent.com/95447782/150655368-fbf7da65-77ea-4f39-8b6a-7265a870be5f.png)
+
 
 
