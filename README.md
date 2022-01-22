@@ -9,9 +9,39 @@ VSDIAT Sky130 Physical Verification workshop labs
 
 Introduction to SkyWater SKY130:
 =======
-Basic DRC/LVS design flow
+The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater’s facility. This PDK is targeting the SKY130 process node.
 
-Theory TBA
+The SkyWater Open Source PDK documentation can be found at <https://skywater-pdk.rtfd.io>.
+
+Open source EDA tools can be used with the Sky 130 PDK:
+
+![image](https://user-images.githubusercontent.com/95447782/150655987-01d3fb50-207c-45d2-aaf9-7d7453ff6f1b.png)
+
+Libraries in the Sky 130 PDK:
+
+![image](https://user-images.githubusercontent.com/95447782/150656014-8c55369b-270c-469c-ba18-0aa16d7fa728.png)
+
+This is the layer stack in the Sky 130 process.
+The Local Interconnect, made of TiN, is quite characteristic of this process, and is only used for very short distance interconnects on devices.
+
+![image](https://user-images.githubusercontent.com/95447782/150656149-0dda54f5-3ff2-4a4b-b902-a52cdf0a519b.png)
+
+Deep N well is available for noise isolation:
+![image](https://user-images.githubusercontent.com/95447782/150656257-8d9f2e63-47ce-4df4-af7e-9f903cae3afd.png)
+
+There are 5 levels of metal:
+
+![image](https://user-images.githubusercontent.com/95447782/150656197-a4094ecc-1350-4417-b68f-8148e7d07a60.png)
+
+Some layers are generated automatically by the Magic layout software. For example, the NPC or nitride poly cut layer, is generated automatically by Magic from the position of other layers, like the poly and the contacts.
+
+![image](https://user-images.githubusercontent.com/95447782/150656239-8067a9b6-cb7b-4bdc-81c2-b6590df35e91.png)
+
+The RDL is done separately:
+
+![image](https://user-images.githubusercontent.com/95447782/150656283-7fcfe552-398e-4758-8d92-a6462c1f84c3.png)
+
+
 
 Labs from Day 1:
 -----------
@@ -54,7 +84,25 @@ Result of post-layout extracted sim:
 DRC/LVS Theory and labs:
 ===
 
-Theory Day 2 TBA
+Physical Verification is aimed at ensuring that we don't manufacture "very expensive glass".
+
+It consists of a number of routines to ensure the manufactured devices will be functional and will perform as expected. As part of Physical Verification we will need to run checks such as:
+
+* Design Rule Check (DRC)
+* Layout vs Schematic (LVS)
+* XOR comparison of layouts
+* Antenna Checks
+* Electrical Rule Checks (ERC)
+* Aging, etc.
+
+Two critical steps of Physical Verification are:
+
+DRC (Design Rule Checks):
+These are required to make sure the design layout can be fabricated at the foundry without issues.
+LVS (Layout vs Schematic):
+This is key to ensure that the circuit we are sending for fabrication matches the design schematics.
+
+Otherwise we may be manufacturing very expensive glass.
 
 Labs from Day 2:
 -----
@@ -1148,6 +1196,7 @@ And we get an LVS match.
 
 References
 ===
+Skywater 130 PDK: https://github.com/google/skywater-pdk
 Open_PDKS: http://www.opencircuitdesign.com/open_pdks/
 Xschem: http://repo.hu/projects/xschem/xschem_man/xschem_man.html
 VSD Physical Verification using SKY130: https://www.vlsisystemdesign.com/physical-verification-using-sky130/
