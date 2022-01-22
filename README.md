@@ -1227,8 +1227,6 @@ Skywater 130 PDK: https://github.com/google/skywater-pdk
 
 Open_PDKS: http://www.opencircuitdesign.com/open_pdks/
 
-Xschem: http://repo.hu/projects/xschem/xschem_man/xschem_man.html
-
 VSD Physical Verification using SKY130: https://www.vlsisystemdesign.com/physical-verification-using-sky130/
 
 
