@@ -11,15 +11,13 @@ Introduction to SkyWater SKY130:
 =======
 The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater’s facility. This PDK is targeting the SKY130 process node.
 
-The SkyWater Open Source PDK documentation can be found at <https://skywater-pdk.rtfd.io>.
-
 Open source EDA tools can be used with the Sky 130 PDK:
 
 <img src="https://user-images.githubusercontent.com/95447782/150655987-01d3fb50-207c-45d2-aaf9-7d7453ff6f1b.png" alt="drawing" style="width:420px;"/>
 
 Libraries in the Sky 130 PDK:
 
-![image](https://user-images.githubusercontent.com/95447782/150656014-8c55369b-270c-469c-ba18-0aa16d7fa728.png" alt="drawing" style="width:420px;"/>
+<img src="https://user-images.githubusercontent.com/95447782/150656014-8c55369b-270c-469c-ba18-0aa16d7fa728.png" alt="drawing" style="width:420px;"/>
 
 This is the layer stack in the Sky 130 process.
 The Local Interconnect, made of TiN, is quite characteristic of this process, and is only used for very short distance interconnects on devices.
