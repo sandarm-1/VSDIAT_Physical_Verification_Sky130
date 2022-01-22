@@ -21,22 +21,26 @@ Inverter in xschem and simulated with ngspice: (pre-layout)
 
 
 Prelayout sim result:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604088-31b7ce3c-79f4-46e1-99cd-17cb042fdd4b.png" alt="drawing" style="width:420px;"/>
 
 
 
 
 This is the layout:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604126-b504da36-8436-44b3-8eba-ccb192ea77e4.png" alt="drawing" style="width:420px;"/>
 
 
 
 LVS clean:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604143-a3a54bac-88e1-41e0-8492-992f902414a5.png" alt="drawing" style="width:420px;"/>
 
 
 
 Result of post-layout extracted sim:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604153-10b6d863-19dd-462d-b674-de670486300c.png" alt="drawing" style="width:420px;"/>
 
 
@@ -54,6 +58,7 @@ TBA
 Labs from Day 2:
 -----
 GDS of an AND2 gate standard cell, read in from the PDK standard cell GDSs available that come with the PDK from the foundry:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604215-17ca0748-4f82-4df4-bab2-ef0739e45959.png" alt="drawing" style="width:420px;"/>
 
 
@@ -63,11 +68,13 @@ We played with cif istyle etc to see the effect.
 Then we looked at port index number that Magic arbitrarily assigns to each pin after reading in the GDS.
 
 For example for VPWR Magic says that the port index is 1.
+
 <img src="https://user-images.githubusercontent.com/95447782/150604223-00b95240-af0c-44b9-bd24-3bd8df420149.png" alt="drawing" style="width:420px;"/>
 
 
 
 But then we checked the .spice netlist for that AND2_1 gate from the PDK and we noticed the port order in the .spice netlist of it doesn’t match the order in the GDS read in by Magic.
+
 <img src="https://user-images.githubusercontent.com/95447782/150604238-4bea3442-b9fe-4073-9146-bedc3d6a5fa7.png" alt="drawing" style="width:420px;"/>
 
 
@@ -78,16 +85,19 @@ We read in the LEF data for the cell in Magic:
 lef read /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
 
 After reading the LEF, now Magic has the info to know the actual use and class of each port in the cell:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604246-2e666941-9183-4cb0-a4b0-f5bf4e9ab3c1.png" alt="drawing" style="width:420px;"/>
 
 With this TCL script Magic can also know the right port order, from the .spice file:
 readspice /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
 
 Now after running this, Magic knows the correct port order, matching the .spice file:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604272-8d05036f-4db1-47ef-803f-006a7416196c.png" alt="drawing" style="width:420px;"/>
 
 
 **Abstract views:**
+
 <img src="https://user-images.githubusercontent.com/95447782/150604282-4380659c-fb49-4d87-ba43-5fe9d756bcb3.png" alt="drawing" style="width:420px;"/>
 
 
@@ -95,18 +105,22 @@ But abstract views don’t have the transistors in them. They are more concerned
 
 
 Trying to write an abstract view to a GDS is not a good idea and Magic will warn you that it’s not likely a good idea.
+
 <img src="https://user-images.githubusercontent.com/95447782/150604357-ca419234-b450-4a3c-b0f6-3717954466a5.png" alt="drawing" style="width:420px;"/>
 
 Reading back a GDS written from a LEF will produce layers that don’t make sense.
+
 <img src="https://user-images.githubusercontent.com/95447782/150604371-264e84d2-36bd-4fa1-9381-a5e1b65c2d15.png" alt="drawing" style="width:420px;"/>
 
 However there is this trick where we can put in a LEF standard cell in our GDS layout, save the GDS, then reopen it, and Magic then pulls the actual layout (not abstract) for the standard cell, because it knows the path to where to find the layout from the libraries path.
+
 <img src="https://user-images.githubusercontent.com/95447782/150604388-91281e7f-3094-4b17-9c39-78ea4cae0ac6.png" alt="drawing" style="width:420px;"/>
 
 <img src="https://user-images.githubusercontent.com/95447782/150604405-e68d7c07-242f-4cbb-81b0-2d9db4dc8272.png" alt="drawing" style="width:420px;"/>
 
 To descend into the layout of a cell: select it with i and press greater than key > .
 If we type property inside the standard cell we have descended into, we see its an abstraction:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604417-be87bb1e-3278-4250-b80d-195397e8ce5c.png" alt="drawing" style="width:420px;"/>
 
 To return back up to the cell above, type the less than key < .
@@ -127,6 +141,7 @@ Annotate it with SPICE:
 `readspice /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice`
 
 The result is:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604458-ce2b9dd5-33e9-4b76-aaaa-a3e7aa10b80d.png" alt="drawing" style="width:420px;"/>
 
 Note the cell name above is my_sky130_fd_sc_hd__and2_1.
@@ -138,25 +153,28 @@ Comparing both layouts ensures they are both the same:
 
 **Basic extraction:**
 After running
-`extract all
-ext2spice lvs
-ext2spice`
+`extract all`
+`ext2spice lvs`
+`ext2spice`
 
 We get .ext (intermediate file) and .spice file.
 We can compare this extracted spice file and it’s the same as the spice subcircuit given in the PDK.
 
 This is the spice extracted:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604749-cbd60349-69fb-4b33-8e49-4f274ea65f19.png" alt="drawing" style="width:420px;"/>
 
 
 This is the spice in the PDK:
+
 <img src="https://user-images.githubusercontent.com/95447782/150604756-9780026e-8ab7-4952-9bcf-b3650c318f57.png" alt="drawing" style="width:420px;"/>
 
 
 If we extract with C, then the parasitic caps get inserted in the netlist:
 
-`ext2spice cthresh 0
-ext2spice`
+`ext2spice cthresh 0`
+`ext2spice`
+
 <img src="https://user-images.githubusercontent.com/95447782/150604776-3e4ebd60-a953-4480-a56f-909e01151052.png" alt="drawing" style="width:420px;"/>
 
 
