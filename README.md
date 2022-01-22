@@ -4,7 +4,7 @@ VSDIAT Sky130 Physical Verification workshop labs
 * Day 1 - Introduction to SkyWater SKY130
 * Day 2 -DRC/LVS Theory and labs
 * Day 3 - Front-end and back-end DRC
-* Day 4 - Understanding PNR and physical verification (Bonus Videos)
+* Day 4 - Understanding PNR and physical verification
 * Day 5 - Running LVS
 
 Introduction to SkyWater SKY130:
