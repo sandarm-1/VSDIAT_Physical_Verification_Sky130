@@ -681,42 +681,42 @@ Day 5: Running LVS
 ====
 
 This is a good summary of extraction options:
- ![image](https://user-images.githubusercontent.com/95447782/150654615-67796891-acdd-473f-8e3c-f00067b3a23c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654615-67796891-acdd-473f-8e3c-f00067b3a23c.png" alt="drawing" style="width:420px;"/>
 
 
 Netgen LVS shell command:
-![image](https://user-images.githubusercontent.com/95447782/150654676-a46e0b4c-cdb3-4f9d-af82-2cc97bc18a0f.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654676-a46e0b4c-cdb3-4f9d-af82-2cc97bc18a0f.png" alt="drawing" style="width:420px;"/>
 
  
 Ideally we would like to run a hierarchical LVS where a schematic hierarchy matches exactly the layout hierarchy. But that is not always the case.
- ![image](https://user-images.githubusercontent.com/95447782/150654689-391a55ce-8953-473e-b36c-3a035a30bdb5.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654689-391a55ce-8953-473e-b36c-3a035a30bdb5.png" alt="drawing" style="width:420px;"/>
 
  
 In fact, parameterized devices in layout have a wrapper around them so that alone means a difference in hierarchy between schematic and layout.
- ![image](https://user-images.githubusercontent.com/95447782/150654692-948d5abd-d7ae-40fb-b53e-56c26608caa8.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654692-948d5abd-d7ae-40fb-b53e-56c26608caa8.png" alt="drawing" style="width:420px;"/>
 
 So, netgen will “flatten” the hierarchy by including the contents of the cell below into the cell above, and then do the comparison, if the comparison matches then the two hierarchies are equivalent.
- ![image](https://user-images.githubusercontent.com/95447782/150654722-e6c1583f-ac10-40f8-94b0-b720b9191c4a.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654722-e6c1583f-ac10-40f8-94b0-b720b9191c4a.png" alt="drawing" style="width:420px;"/>
 
 Example of this:
- ![image](https://user-images.githubusercontent.com/95447782/150654731-e2ce1ffc-4245-4d8a-8d6f-2bdb7db2822c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654731-e2ce1ffc-4245-4d8a-8d6f-2bdb7db2822c.png" alt="drawing" style="width:420px;"/>
 
 To deal with this type of scenario (quite common), netgen creates a queue of subcircuits, from bottom most to top most, comparing them in order from the bottom up.
 
 The problem with this is that if there is a mismatch in a low level cell, netgen will flatten it up into the next level, which will again not match, and that will get flatten again up to the next level, which will not match, and so on, so we get a report where nothing matches, from top to bottom, and we don’t know where the specific mismatch is (in this example it’s in the low level cell C, but we don’t know from the report).
 
-![image](https://user-images.githubusercontent.com/95447782/150654732-e1444d38-4719-4ff0-ad08-ec990bd08a60.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654732-e1444d38-4719-4ff0-ad08-ec990bd08a60.png" alt="drawing" style="width:420px;"/>
 
 
 To aid in debugging this kind of situation, tt is possible to tell netgen not to flatten certain cells, by telling it `-noflatten=cell_c` likely at the lower levels of the hierarchy, so that if those lower level cells don’t match, but the cells above do match, then we have isolated that we have a mismatch at the lower level cell, so we know where to look and where the error needs fixed.
  
-![image](https://user-images.githubusercontent.com/95447782/150654744-015d2bfc-16a5-4df2-b895-ae57f5a10bde.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654744-015d2bfc-16a5-4df2-b895-ae57f5a10bde.png" alt="drawing" style="width:420px;"/>
 
 This is how netgen gets told that, for a certain device type, parallel devices can be lumped together into a single device, and that some of its terminals are permutable, etc.
- ![image](https://user-images.githubusercontent.com/95447782/150654755-b9c3eea3-0556-42a6-b092-d2dc5767e594.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654755-b9c3eea3-0556-42a6-b092-d2dc5767e594.png" alt="drawing" style="width:420px;"/>
 
 Netgen won’t do network simplification so it must not be assumed that netgen will simplify networks from layout and consider them equivalent to the schematic, because it won’t.
- ![image](https://user-images.githubusercontent.com/95447782/150654760-29e97256-ac7b-46ea-951e-b14bb69c08e2.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654760-29e97256-ac7b-46ea-951e-b14bb69c08e2.png" alt="drawing" style="width:420px;"/>
 
 However for resistors we do want netgen to combine them in series/parallel.
 So, we tell netgen which devices can be combined in series/parallel and with which parameters.
@@ -725,54 +725,54 @@ In netgen we can also insert 0V voltage sources or 0 Ohm resistors in the schema
 
 Dummy devices: if netgen sees a device in layout that has all its terminals tied together, then it will consider it’s a dummy device and will ignore it, i.e. you don’t need to have it in the schematic to get a LVS match.
 
-![image](https://user-images.githubusercontent.com/95447782/150654766-15ddf613-87e2-4dfe-8c77-a3e2b0ae2ba5.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654766-15ddf613-87e2-4dfe-8c77-a3e2b0ae2ba5.png" alt="drawing" style="width:420px;"/>
 
 But if a dummy device doesn’t have all terminals tied together, like a transistor with S, D and B tied together but not the gate, then that’s acting as a MOSCAP and hence you need to backannotate it into the schematic.
 
-![image](https://user-images.githubusercontent.com/95447782/150654768-925786e7-ecaa-428d-8bf2-d35ffe95b6f7.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654768-925786e7-ecaa-428d-8bf2-d35ffe95b6f7.png" alt="drawing" style="width:420px;"/>
 
 When it comes to analyzing the LVS results, the output format allows a side by side comparison:
- ![image](https://user-images.githubusercontent.com/95447782/150654772-3877a476-e46f-4e97-9902-84336d1fdc94.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654772-3877a476-e46f-4e97-9902-84336d1fdc94.png" alt="drawing" style="width:420px;"/>
 
 Prior to doing any comparison, netgen will dump a list of which cells it flattened because it couldn’t find any circuit in the opposing netlist to match it to (we talked about this before, things like those wrappers around parameterized devices, etc).
- ![image](https://user-images.githubusercontent.com/95447782/150654779-8c7e8005-a4e4-4690-9807-c55f5b49e429.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654779-8c7e8005-a4e4-4690-9807-c55f5b49e429.png" alt="drawing" style="width:420px;"/>
 
 Then netgen will do an attempt to do parallel/series combinations of devices, you will see this in the log here:
 
-  ![image](https://user-images.githubusercontent.com/95447782/150654781-03f43f59-2469-4dfe-a3c3-8e1c2ea8a9a3.png)
+   <img src="https://user-images.githubusercontent.com/95447782/150654781-03f43f59-2469-4dfe-a3c3-8e1c2ea8a9a3.png" alt="drawing" style="width:420px;"/>
 
 Then you get the side by side report. Watch for device counts that have been reduced due to parallel/series combining.
- ![image](https://user-images.githubusercontent.com/95447782/150654794-f79839c7-7a78-43dd-b076-395b3e6e1d3a.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654794-f79839c7-7a78-43dd-b076-395b3e6e1d3a.png" alt="drawing" style="width:420px;"/>
 
 At the end you will see a final sanity check of total number of devices and nets of each side. This is a good place to start when debugging LVS errors.
 
 After that summary, netgen gives you the result of pre-match analysis. Remember the pre-match stage is iterative, it will contain a few iterations, each one with its summary of results in the log, so the first iterations may have errors and that is normal, then on next iteration netgen flattens some cells to see if it can get a better pre-match and run the iteration again, and maybe some of the previous errors are gone in the next iteration, so keep this in mind when visually scanning the log. Erros in some of the initial stages of this pre-match iterative process may be just normal and may not be LVS errors at all, just that netgen was trying to find the good amount of flattening the match both netlists as best as possible.
- ![image](https://user-images.githubusercontent.com/95447782/150654820-e91063c7-faec-422f-ad88-769d8f2df45c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654820-e91063c7-faec-422f-ad88-769d8f2df45c.png" alt="drawing" style="width:420px;"/>
 
 After that, netgen will present the matching results, it will distinguish between “match” and “unique match”, where match means there were symmetries and matched after breaking those symmetries.
- ![image](https://user-images.githubusercontent.com/95447782/150654830-47bdc3e0-cdc9-44fd-b659-fb601a6a7372.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654830-47bdc3e0-cdc9-44fd-b659-fb601a6a7372.png" alt="drawing" style="width:420px;"/>
 
 If topology matching succeeds, then you get the result of property matching. Again it may try more parallel/series combinations to try to get the property matching (width of parallel devices, etc).
- ![image](https://user-images.githubusercontent.com/95447782/150654843-c5575dff-5de7-4f4c-8fbe-7ba556302e93.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654843-c5575dff-5de7-4f4c-8fbe-7ba556302e93.png" alt="drawing" style="width:420px;"/>
 
 If the topology and property matching checks both succeed, then netgen does the pin matching check. Always in that order.
- ![image](https://user-images.githubusercontent.com/95447782/150654869-c6d0ebcd-7b3e-4612-9088-39404cadf28e.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654869-c6d0ebcd-7b3e-4612-9088-39404cadf28e.png" alt="drawing" style="width:420px;"/>
 
 If topology matching fails, netgen will dump a list of failing partitions, that gives you a hint of where the mismatch comes from.
-![image](https://user-images.githubusercontent.com/95447782/150654880-9d8bb732-4135-4439-b733-8373aacf0683.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654880-9d8bb732-4135-4439-b733-8373aacf0683.png" alt="drawing" style="width:420px;"/>
  
 General debugging rule of thumb: check DEVICE mismatches first, and if all devices are matching ok, then look at NET mismatches, but ONLY look at NET mismatches after you have all DEVICES matching. This is because if there are DEVICE mismatches, that will produce a long list of NET mismatches as a result, which will go away once the DEVICE mismatch is fixed. So go in that order.
 
 Rule of thumb 2 is that LVS debugging is iterative by nature, so fix the easy and obvious errors first, run LVS again, that will remove many other incomprehensible errors, but will still leave some other errors tackling first the ones that are easy to solve, but go in that order until all LVS errors are gone.
 
-![image](https://user-images.githubusercontent.com/95447782/150654887-60b0d812-1e2e-44e1-820a-30aea87bf72b.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654887-60b0d812-1e2e-44e1-820a-30aea87bf72b.png" alt="drawing" style="width:420px;"/>
 
 Another important LVS debug skill is to understand where to find the info that will guide you to successfully finding the source of your LVS errors to be able to fix them. That means understanding the run-time output from netgen is not the same as the full log output. The run-time output is just a summary, useful for a quick look, but should not be used for debugging. The full log (comp.out) has the key details and is what you need to use for debugging.
-![image](https://user-images.githubusercontent.com/95447782/150654901-15f61199-7436-4e34-a3d7-800f976fa9fd.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654901-15f61199-7436-4e34-a3d7-800f976fa9fd.png" alt="drawing" style="width:420px;"/>
 
  
 Netgen has a GUI for debug, you can get it running netgen with `netgen -gui`. The GUI is written in python and it takes the netgen output in json format.
- ![image](https://user-images.githubusercontent.com/95447782/150654912-48050803-98ee-4e24-9791-a16372ab83f8.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654912-48050803-98ee-4e24-9791-a16372ab83f8.png" alt="drawing" style="width:420px;"/>
 
 The GUI may be handy for debug sometimes, it’s a bit more visual and it doesn’t truncate circuit names (the log output does).
 
@@ -785,167 +785,167 @@ We have 2 simple netlists, they are initially the same, we run LVS on them and w
 
 Here we run netgen lvs with
 `netgen lvs netA.spice netB.spice`
-![image](https://user-images.githubusercontent.com/95447782/150654923-fc3fbd18-4abf-4818-9674-a97fa845552a.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654923-fc3fbd18-4abf-4818-9674-a97fa845552a.png" alt="drawing" style="width:420px;"/>
 
  
 Then we modify one of the netlists to make them mismatch, we run LVS again and we inspect output logs to see how things look like in case of a mismatch like this.
-![image](https://user-images.githubusercontent.com/95447782/150654927-ce4f80b7-3d31-4c7d-8cae-6278f07b7d04.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654927-ce4f80b7-3d31-4c7d-8cae-6278f07b7d04.png" alt="drawing" style="width:420px;"/>
 
  
 
 
 Excercise 2:
 If the two netlists have .subckt definitions inside them but no subcircuit instantiations, netgen lvs will not run, unless we, along with the two netlist names, give it also the name of the subcircuit to be compared.
-![image](https://user-images.githubusercontent.com/95447782/150654929-e553b256-eb25-4dc1-a918-8a5b9ae9981b.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654929-e553b256-eb25-4dc1-a918-8a5b9ae9981b.png" alt="drawing" style="width:420px;"/>
 
-![image](https://user-images.githubusercontent.com/95447782/150654932-376e16bd-4a54-4d75-867c-b7991b3e7dbe.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654932-376e16bd-4a54-4d75-867c-b7991b3e7dbe.png" alt="drawing" style="width:420px;"/>
 
 
 For this scenario, we run netgen lvs like this, giving it the name of the subcircuit to be compared:
 `netgen lvs “netA.spice test” “netB.spice test”`
 Then the lvs runs and we see the match:
-![image](https://user-images.githubusercontent.com/95447782/150654937-5857c0dc-042e-40ef-8af1-2b04f7c8b3fb.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654937-5857c0dc-042e-40ef-8af1-2b04f7c8b3fb.png" alt="drawing" style="width:420px;"/>
 
 
 We also see the comp.out circuits and pins are the same:
- ![image](https://user-images.githubusercontent.com/95447782/150654950-afda815e-4b0d-4dd3-a1e8-73c1bd7befbc.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654950-afda815e-4b0d-4dd3-a1e8-73c1bd7befbc.png" alt="drawing" style="width:420px;"/>
 
 Pins of the test subcircuit are matching.
 
 Now we modify the pins order in the test subcircuit, and we see that it’s still a exact match, because netgen doesn’t care that the pins are ordered differently as long as internal connectivity is the same between netlists.
- ![image](https://user-images.githubusercontent.com/95447782/150654954-d43fe26e-0fce-4239-b8c6-2e40e7ea63e9.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654954-d43fe26e-0fce-4239-b8c6-2e40e7ea63e9.png" alt="drawing" style="width:420px;"/>
 
 But if we now change the internal order of the connections, now netgen sees a mismatch and reports that top level pins are mismatching.
- ![image](https://user-images.githubusercontent.com/95447782/150654959-40cc7be3-36cf-46f4-8928-a31667cde56d.png)
-![image](https://user-images.githubusercontent.com/95447782/150654962-e4a3b6f4-fdd5-4084-9da9-5b24385690eb.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654959-40cc7be3-36cf-46f4-8928-a31667cde56d.png" alt="drawing" style="width:420px;"/>
+ <img src="https://user-images.githubusercontent.com/95447782/150654962-e4a3b6f4-fdd5-4084-9da9-5b24385690eb.png" alt="drawing" style="width:420px;"/>
  
 Also here we prepare our run_lvs.sh script which looks like this:
- ![image](https://user-images.githubusercontent.com/95447782/150654967-fa6b64fb-6c50-4417-bf11-ab8736abd4db.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654967-fa6b64fb-6c50-4417-bf11-ab8736abd4db.png" alt="drawing" style="width:420px;"/>
 
 
 This will produce the json output which is used by the “count_lvs.py” python script and it will append the output of that script to the log, an lvs count summary that looks like this: 
-![image](https://user-images.githubusercontent.com/95447782/150654968-53732d23-0afe-48b9-9cc4-8e0faae49e83.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150654968-53732d23-0afe-48b9-9cc4-8e0faae49e83.png" alt="drawing" style="width:420px;"/>
 
 
 Excercise 3:
 Now we deal with empty subcircuit definitions which can be treated as black boxes by netgen.
- ![image](https://user-images.githubusercontent.com/95447782/150654972-2fdbf54c-5149-4739-8155-afabda19f4fc.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654972-2fdbf54c-5149-4739-8155-afabda19f4fc.png" alt="drawing" style="width:420px;"/>
 
 Initially all cells have matching pins.
- ![image](https://user-images.githubusercontent.com/95447782/150654977-795d0a0c-737d-4f32-882d-bb2a9418491c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654977-795d0a0c-737d-4f32-882d-bb2a9418491c.png" alt="drawing" style="width:420px;"/>
 
 But if we change on cell1 the order of pins from A B C to C B A
 Now we get a mismatch. 
- ![image](https://user-images.githubusercontent.com/95447782/150654982-34cf366c-f9ae-4e5c-b68a-7de665456033.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654982-34cf366c-f9ae-4e5c-b68a-7de665456033.png" alt="drawing" style="width:420px;"/>
 
 Here we see it has treated pin names as meaningful:
- ![image](https://user-images.githubusercontent.com/95447782/150654983-e7b8d273-e2fd-48c2-aed1-178e8ca6765b.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654983-e7b8d273-e2fd-48c2-aed1-178e8ca6765b.png" alt="drawing" style="width:420px;"/>
 
 Now if we change pin names on cell1 to be A B D instead of A B C, then it finds that D is missing on cell1 in netlistB and C is missing on cell1 in netlistA.
- ![image](https://user-images.githubusercontent.com/95447782/150654987-43c08aa4-2aff-4193-8b3e-fa81781cb226.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654987-43c08aa4-2aff-4193-8b3e-fa81781cb226.png" alt="drawing" style="width:420px;"/>
 
 Now, if we change the cell name from cell1 to cell4 in netlistA (leaving pins as A B C), both in the definition and in the instantiation, now we get a unique match again. This is because the cell name is cell4 in netlistA and cell1 in netlisB, but other than that the connectivity is exactly the same in both netlists, so netgen understands that cell4 on netlistA is equivalent to cell1 in netlistB.
- ![image](https://user-images.githubusercontent.com/95447782/150654991-0e2ad9c7-428d-46b4-8862-d9e6aa656613.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654991-0e2ad9c7-428d-46b4-8862-d9e6aa656613.png" alt="drawing" style="width:420px;"/>
 
 In fact, we see it achieves this because first it notices that there is not cell4 in netlisB so it goes ahead and flattens cell4, and then both netlists are equivalent.
- ![image](https://user-images.githubusercontent.com/95447782/150654994-614045ce-210f-45e3-80d4-b3f462c66cac.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654994-614045ce-210f-45e3-80d4-b3f462c66cac.png" alt="drawing" style="width:420px;"/>
 
 If we run lvs with the `-blackbox` option, it forces netgen to treat cell1 to cell4 as blackboxes, and therefore cell4 is one particular blackbox and cell1 is a different blackbox, so then the lvs shows a mismatch, as now cell4 cannot be flattened or considered equivalent to cell1.
- ![image](https://user-images.githubusercontent.com/95447782/150654998-07e2b27b-3047-43a2-901c-91dcb686b86b.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150654998-07e2b27b-3047-43a2-901c-91dcb686b86b.png" alt="drawing" style="width:420px;"/>
 
 Excercise 4:
 Now we have a netlist with SPICE components (R, C, Diode…) as opposed to just subcircuits (which start by X).
- ![image](https://user-images.githubusercontent.com/95447782/150655003-5754109a-7191-4e6f-b298-8a26c9ab27a7.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655003-5754109a-7191-4e6f-b298-8a26c9ab27a7.png" alt="drawing" style="width:420px;"/>
 
 In cell1, we swap out the pins from A B C to C B A. Inside cell1 we only have 2 resistors attached to A B and B C respectively, and resistor terminals are swappable, but netgen still sees a mismatch due to the swapped pins A and C.
 
 That’s because we have not told netgen that for cell1 pins A and C are permutable. We need to tell it so in the setup.tcl file, as follows:
 At the bottom of the setup.tcl file:
-![image](https://user-images.githubusercontent.com/95447782/150655010-95293191-3a75-4155-b544-da67a27494ed.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655010-95293191-3a75-4155-b544-da67a27494ed.png" alt="drawing" style="width:420px;"/>
 
 Inside the .sh run script, use the new .tcl:
-![image](https://user-images.githubusercontent.com/95447782/150655013-d4e59abd-b100-44d4-9c35-7d479df6f0b8.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655013-d4e59abd-b100-44d4-9c35-7d479df6f0b8.png" alt="drawing" style="width:420px;"/>
 
 
 Now we get a match.
- ![image](https://user-images.githubusercontent.com/95447782/150655015-c7b5e65c-d40f-40b4-b4c6-95856e36c541.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655015-c7b5e65c-d40f-40b4-b4c6-95856e36c541.png" alt="drawing" style="width:420px;"/>
 
 That’s because in cell1 there are resistors which are swappable, but in cell3 we have diodes which aren’t swappable, so if we swap pin names on cell3 (while at the same time swapping internal net connections to keep overall connectivity in cell3) and run that past lvs, it passes lvs this time.
 
 Excercise 5:
 This is an example POR circuit from Caravel analog project.
-![image](https://user-images.githubusercontent.com/95447782/150655019-fe7b32ed-d6a8-442a-a425-3d3b09863b2a.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655019-fe7b32ed-d6a8-442a-a425-3d3b09863b2a.png" alt="drawing" style="width:420px;"/>
 
 If we netlist directly from xschem by pressing Netlist buttom directly, we get a netlist but it’s not proper for lvs, since it has a top level subcircuit definition commented out at the top.
- ![image](https://user-images.githubusercontent.com/95447782/150655021-c8fbfe80-53bb-413a-aa69-ea1a731a2c74.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655021-c8fbfe80-53bb-413a-aa69-ea1a731a2c74.png" alt="drawing" style="width:420px;"/>
 
 So in xschem we need to enable Simulation → “LVS netlist: Top level is a .subckt”, then we can Netlist.
- ![image](https://user-images.githubusercontent.com/95447782/150655026-25d10718-9852-4050-a3c2-9cd477adccb1.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655026-25d10718-9852-4050-a3c2-9cd477adccb1.png" alt="drawing" style="width:420px;"/>
 
 Now the top level .subckt is not commented out:
- ![image](https://user-images.githubusercontent.com/95447782/150655027-304c50ce-6b74-497f-8635-da9d0f4ce658.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655027-304c50ce-6b74-497f-8635-da9d0f4ce658.png" alt="drawing" style="width:420px;"/>
 
 In this netlist, transistors and also resistors are not simple SPICE primitives but subcircuits, this is standard practice in PDKs.
 
 In order to tell netgen to treat these particular subcircuits as if they were low level primitives, we need to tell it to do so, and we do that in the setup.tcl file that netgen uses.
 
 For example, that file contains some Tcl loops to inform netgen that it is fine to do some pin permutations, parallel/series combinations, etc, for certain subcircuits that we want netgen to treat as a low level primitives.
- ![image](https://user-images.githubusercontent.com/95447782/150655030-21f6dd35-0b5a-4941-9a16-716f71fe508f.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655030-21f6dd35-0b5a-4941-9a16-716f71fe508f.png" alt="drawing" style="width:420px;"/>
 
 Now we open the circuit layout and we extract the netlist from the layout, for LVS.
 `extract do local`
 `extract all`
 `ext2spice lvs`
 `ext2spice`
-![image](https://user-images.githubusercontent.com/95447782/150655033-138b5a6b-456f-475f-9420-f471bace35bf.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655033-138b5a6b-456f-475f-9420-f471bace35bf.png" alt="drawing" style="width:420px;"/>
 
  
 We then run netgen LVS with the provided run_lvs_wrapper.sh:
- ![image](https://user-images.githubusercontent.com/95447782/150655037-cf4f3683-3558-43d9-baec-38fec657d839.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655037-cf4f3683-3558-43d9-baec-38fec657d839.png" alt="drawing" style="width:420px;"/>
 
 We get some mismatches.
- ![image](https://user-images.githubusercontent.com/95447782/150655044-b2531b9b-368f-4757-9126-0cb9fd872a55.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655044-b2531b9b-368f-4757-9126-0cb9fd872a55.png" alt="drawing" style="width:420px;"/>
 
 Inside the comp.out we see the cause of the LVS mismatch is due to the standard cells:
- ![image](https://user-images.githubusercontent.com/95447782/150655048-75b14c7d-0ec4-487e-b7a6-fa39c7033919.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655048-75b14c7d-0ec4-487e-b7a6-fa39c7033919.png" alt="drawing" style="width:420px;"/>
 
 Standard cells are not included in the schematic netlist, and without a proper subcircuit definition netgen just names the standard cell pins as 1, 2, 3, … 6, whereas in the layout standard cells appear as proper subcircuits with their pins named with sensible names, and netgen considers they are not necessarily the same thing on both sides, so it propagates the pin name mismatch to the top level and thus the LVS ends up not being clean.
 
 So we need to provide a proper subcircuit definition for the standard cells.
 
 We will get that from the corresponding testbench that is supposed to test this schematic.
- ![image](https://user-images.githubusercontent.com/95447782/150655053-29fe3a34-af2f-4db5-8812-5625368d6553.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655053-29fe3a34-af2f-4db5-8812-5625368d6553.png" alt="drawing" style="width:420px;"/>
 
 From that TB we see it has a block of code with includes for the standard cell libraries.
 We netlist this TB (no need to enable the Simulation LVS blabla option this time) and therefore we get those standard cell include lines printed into the netlist.
- ![image](https://user-images.githubusercontent.com/95447782/150655054-b1ad23cd-b7e1-4265-8b7f-d9aaefad9bcd.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655054-b1ad23cd-b7e1-4265-8b7f-d9aaefad9bcd.png" alt="drawing" style="width:420px;"/>
 
 We will LVS the layout agains this netlist now.
- ![image](https://user-images.githubusercontent.com/95447782/150655057-4752ccd4-5e4f-4aea-abb3-8cfa098fdd98.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655057-4752ccd4-5e4f-4aea-abb3-8cfa098fdd98.png" alt="drawing" style="width:420px;"/>
 
 Now we get the LVS match, except for some unmatched pins.
- ![image](https://user-images.githubusercontent.com/95447782/150655060-b6462b19-3fa8-4462-a836-19609aee2546.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655060-b6462b19-3fa8-4462-a836-19609aee2546.png" alt="drawing" style="width:420px;"/>
 
 Now we run the netgen LVS with a run script that tells netgen to compare the LVS not of the top level but of the “example_por” cell that is instantiated in the schematic.
- ![image](https://user-images.githubusercontent.com/95447782/150655064-0ef1b056-9bf5-42b9-8c56-dab43b84bf26.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655064-0ef1b056-9bf5-42b9-8c56-dab43b84bf26.png" alt="drawing" style="width:420px;"/>
 
 And we see the “example_por” cells are LVS clean.
- ![image](https://user-images.githubusercontent.com/95447782/150655065-3d566239-12d5-4e88-acde-24ef78c58f6c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655065-3d566239-12d5-4e88-acde-24ef78c58f6c.png" alt="drawing" style="width:420px;"/>
 
 These are the pin mismatches in the wrapper:
- ![image](https://user-images.githubusercontent.com/95447782/150655066-2d328f09-3f7b-41bd-9f9d-8fba9fc9bca2.png)
-![image](https://user-images.githubusercontent.com/95447782/150655070-fa535c1e-8b1e-4c02-9f75-00fc0bf6e8bb.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655066-2d328f09-3f7b-41bd-9f9d-8fba9fc9bca2.png" alt="drawing" style="width:420px;"/>
+ <img src="https://user-images.githubusercontent.com/95447782/150655070-fa535c1e-8b1e-4c02-9f75-00fc0bf6e8bb.png" alt="drawing" style="width:420px;"/>
 
  
 Important shortcut key in Magic, `s s s` to select a whole net, important for tracing through the layout along various layers.
 
 We find that io_analog[4] is tied to io_clamp_high[0], not an error but two pins on same metal track, so let’s split them by a metal 3 resistor shortcircuit (paint rmetal3).
- ![image](https://user-images.githubusercontent.com/95447782/150655077-748f56e0-5674-42df-b5ea-162fb7e1b0ca.png)
-![image](https://user-images.githubusercontent.com/95447782/150655078-b87c930a-2abc-4c8a-b05d-68d582fb89bf.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655077-748f56e0-5674-42df-b5ea-162fb7e1b0ca.png" alt="drawing" style="width:420px;"/>
+ <img src="https://user-images.githubusercontent.com/95447782/150655078-b87c930a-2abc-4c8a-b05d-68d582fb89bf.png" alt="drawing" style="width:420px;"/>
 
  
 The same resistor must be added to the schematic in xschem:
- ![image](https://user-images.githubusercontent.com/95447782/150655082-1987f2cf-0784-4ce8-a7ff-26dec718bdcd.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655082-1987f2cf-0784-4ce8-a7ff-26dec718bdcd.png" alt="drawing" style="width:420px;"/>
 
 Then we can netlist again and run LVS again. Still there are 9 pins mismatching due to being shorted to vssa1 and vssd1 in the layout, and therefore need resistors added to separate the two nets as well. Again, we need to add equivalent resistors in xschem, then run netgen lvs again will get it LVS clean.
 
@@ -955,44 +955,41 @@ Excercise 6:
 We are going to LVS a layout against a verilog netlist, in this case a digital PLL.
 First we extract the layout netlist and we run LVS agains the verilog netlist “digital_pll.v” which is a verilog netlist (i.e. not behavioural verilog but a netlist).
 LVS fails and upon looking at the log we see missing fill cells and tap cells in the layout:
-![image](https://user-images.githubusercontent.com/95447782/150655086-4b835906-b995-4cb7-9e28-8e5161227702.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655086-4b835906-b995-4cb7-9e28-8e5161227702.png" alt="drawing" style="width:420px;"/>
 
 We see that the fill cells in the verilog netlist are called FILLER_0_11, we search for any of those in the extracted layout netlist to see if they are there or not, but it’s not there.
 
 We go back to Magic to see if that FILLER_0_11 is there or not, we search for it with (important Magic command):
 `select FILLER_0_11`
 And indeed it’s there.
- ![image](https://user-images.githubusercontent.com/95447782/150655094-e660aaef-10e9-4860-8cbf-345e8289b6c1.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655094-e660aaef-10e9-4860-8cbf-345e8289b6c1.png" alt="drawing" style="width:420px;"/>
 
 If we push (descend) into the cell with > key, we see it’s a quite simple thing so what happens is that the extractor has optimized it out because it doesn’t have any active device or anything “circuit-like”.
 
 To fix this, we edit the netgen setup.tcl file. We find the section where it talks about fill.
- ![image](https://user-images.githubusercontent.com/95447782/150655097-53235a34-c927-4962-b6cb-8c6fb10576b6.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655097-53235a34-c927-4962-b6cb-8c6fb10576b6.png" alt="drawing" style="width:420px;"/>
 
 We are going to assume that this layout (for digital_pll.v or similar placed-and-routed layout) comes from a PNR tool, rather than from a human. Hence we are going to assume the PNR tool is fine enough that we can trust it will never put fill and tap cells in any wrong place, or upside down, or overlapping something else causing a short, or an open, etc… So we are going to make it so that netgen completely ignores these fill cells.
 For that, we set this environment variable MAGIC_EXT_USE_GDS. We put it inside netgen’s setup.tcl file.
-![image](https://user-images.githubusercontent.com/95447782/150655140-77289bdc-df66-4067-b804-82c3b2ccae7a.png)
+ <img src="https://user-images.githubusercontent.com/95447782/150655140-77289bdc-df66-4067-b804-82c3b2ccae7a.png" alt="drawing" style="width:420px;"/>
 
 And that way we get a match!
- ![image](https://user-images.githubusercontent.com/95447782/150655143-b7ba6794-86d3-4c35-9991-8f826837e567.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655143-b7ba6794-86d3-4c35-9991-8f826837e567.png" alt="drawing" style="width:420px;"/>
 
 Excercise 9:
 LVS with property errors.
 After extracting the layout and netlisting the schematic, we run LVS and see property errors in some devices.
- ![image](https://user-images.githubusercontent.com/95447782/150655357-c355f0d9-f849-4502-b7e8-7f0c421c34a0.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655357-c355f0d9-f849-4502-b7e8-7f0c421c34a0.png" alt="drawing" style="width:420px;"/>
 
 We use this information to see exactly what caps, resistors and transistors we need to edit, in this case in the schematic, to get the LVS match again.
 
 For the resistors and caps, we change their properties in the schematic.
- ![image](https://user-images.githubusercontent.com/95447782/150655362-86138425-d863-4afd-a1a8-ac5b3c7504fe.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655362-86138425-d863-4afd-a1a8-ac5b3c7504fe.png" alt="drawing" style="width:420px;"/>
 
 For the transistor, we change it in the layout from 2 fingers to 1 finger.
 For this, we first locate the specific transistor which is sky130_fd_pr__nfet_g5v0d10v5_8KW54N_0.
 
- ![image](https://user-images.githubusercontent.com/95447782/150655365-aecbee23-d69c-48b3-9c63-428f6f6d217c.png)
+  <img src="https://user-images.githubusercontent.com/95447782/150655365-aecbee23-d69c-48b3-9c63-428f6f6d217c.png" alt="drawing" style="width:420px;"/>
 
 And we get an LVS match.
- ![image](https://user-images.githubusercontent.com/95447782/150655368-fbf7da65-77ea-4f39-8b6a-7265a870be5f.png)
-
-
-
+  <img src="https://user-images.githubusercontent.com/95447782/150655368-fbf7da65-77ea-4f39-8b6a-7265a870be5f.png" alt="drawing" style="width:420px;"/>
