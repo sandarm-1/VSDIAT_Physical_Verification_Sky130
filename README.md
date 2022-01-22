@@ -1,4 +1,4 @@
-# VSDIAT_PV_Sky130_3
+# VSDIAT_PV_Sky130
 VSDIAT Sky130 Physical Verification workshop labs
 
 * Day 1 - Introduction to SkyWater SKY130
