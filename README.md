@@ -1,14 +1,17 @@
 # VSDIAT_PV_Sky130_3
 VSDIAT Sky130 Physical Verification workshop labs
 
+* Day 1 - Introduction to SkyWater SKY130
+* Day 2 -DRC/LVS Theory and labs
+* Day 3 - Front-end and back-end DRC
+* Day 4 - Understanding PNR and physical verification (Bonus Videos)
+* Day 5 - Running LVS
 
-Day 1:
+Introduction to SkyWater SKY130:
 =======
 Basic DRC/LVS design flow
 
-Theory from Day 1:
------------
-TBA
+Theory TBA
 
 Labs from Day 1:
 -----------
@@ -48,16 +51,14 @@ Result of post-layout extracted sim:
 
 
 
-DAY 2:
+DRC/LVS Theory and labs:
 ===
 
-Theory from Day 2:
------
-TBA
+Theory Day 2 TBA
 
 Labs from Day 2:
 -----
-GDS of an AND2 gate standard cell, read in from the PDK standard cell GDSs available that come with the PDK from the foundry:
+We start with a GDS of an AND2 gate standard cell, read in from the PDK standard cell GDSs available that come with the PDK from the foundry:
 
 <img src="https://user-images.githubusercontent.com/95447782/150604215-17ca0748-4f82-4df4-bab2-ef0739e45959.png" alt="drawing" style="width:420px;"/>
 
@@ -299,11 +300,9 @@ And we see that the XOR catches the difference clearly.
 
 
 
-Day 3:
+Front-end and back-end DRC:
 =====
 
-Theory from Day 3:
------------
 Skywater 130 DRC rules:
 https://skywater-pdk--136.org.readthedocs.build/en/136/rules.html
 
@@ -754,12 +753,17 @@ Then we load the fill onto the original layout:
 <img src="https://user-images.githubusercontent.com/95447782/150619219-711f31ca-73bc-4fbe-8166-f3a1c53cf8ac.png" alt="drawing" style="width:420px;"/>
 
 
+Understanding PNR and physical verification:
+====
+Theory Day 4 TBA
 
 
-Day 5: Running LVS
+
+Running LVS:
 ====
 
-This is a good summary of extraction options:
+LVS is the process of comparing two netlists, one from layout and one from schematic.
+This is a good summary of LVS extraction options:
 
 <img src="https://user-images.githubusercontent.com/95447782/150654615-67796891-acdd-473f-8e3c-f00067b3a23c.png" alt="drawing" style="width:420px;"/>
 
@@ -1140,3 +1144,11 @@ For this, we first locate the specific transistor which is sky130_fd_pr__nfet_g5
 And we get an LVS match.
 
 <img src="https://user-images.githubusercontent.com/95447782/150655368-fbf7da65-77ea-4f39-8b6a-7265a870be5f.png" alt="drawing" style="width:420px;"/>
+
+
+References
+===
+Open_PDKS: http://www.opencircuitdesign.com/open_pdks/
+Xschem: http://repo.hu/projects/xschem/xschem_man/xschem_man.html
+VSD Physical Verification using SKY130: https://www.vlsisystemdesign.com/physical-verification-using-sky130/
+
