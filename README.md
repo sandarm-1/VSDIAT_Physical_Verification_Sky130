@@ -1,5 +1,5 @@
-# VSDIAT_PV_Sky130
-VSDIAT Sky130 Physical Verification workshop labs
+# VSDIAT_Phisical_Verification_Sky130
+VSDIAT Skywater 130nm Physical Verification, technology overview, PDK and EDA tools workshop
 
 * Day 1 - Introduction to SkyWater SKY130
 * Day 2 -DRC/LVS Theory and labs
@@ -7,7 +7,7 @@ VSDIAT Sky130 Physical Verification workshop labs
 * Day 4 - Understanding PNR and physical verification
 * Day 5 - Running LVS
 
-Introduction to SkyWater SKY130:
+Introduction to SkyWater 130nm:
 =======
 The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater’s facility. This PDK is targeting the SKY130 process node.
 
