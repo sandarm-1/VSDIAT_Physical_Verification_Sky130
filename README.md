@@ -1,4 +1,4 @@
-# VSDIAT_Phisical_Verification_Sky130
+# Physical Verification in Skywater 130nm Technology
 VSDIAT Skywater 130nm Physical Verification, technology overview, PDK and EDA tools workshop
 
 * Day 1 - Introduction to SkyWater SKY130
